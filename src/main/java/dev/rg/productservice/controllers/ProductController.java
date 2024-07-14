@@ -1,11 +1,9 @@
 package dev.rg.productservice.controllers;
 
+import dev.rg.productservice.dtos.UpdateProductDto;
 import dev.rg.productservice.models.Product;
 import dev.rg.productservice.services.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,18 +22,21 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts()
+    {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/product/{id}")
-    public Product getSingleProduct(@PathVariable("id") Long id){
+    @GetMapping("/products/{id}")
+    public Product getSingleProduct(@PathVariable("id") Long id)
+    {
         return productService.getSingleProduct(id);
     }
 
-    public Product updateProduct(){
-
-        return null;
+    @PutMapping("/products/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody UpdateProductDto updateProduct)
+    {
+        return productService.updateProduct(id, updateProduct);
     }
 
     public void deleteProduct(){

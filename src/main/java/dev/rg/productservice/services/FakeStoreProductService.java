@@ -1,8 +1,10 @@
 package dev.rg.productservice.services;
 
 import dev.rg.productservice.dtos.FakeStoreProductDto;
-import dev.rg.productservice.models.Category;
+import dev.rg.productservice.dtos.UpdateProductDto;
 import dev.rg.productservice.models.Product;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -40,6 +42,26 @@ public class FakeStoreProductService implements ProductService{
             products.add(fakeStoreProductDto.toProduct());
         }
         return products;
+    }
+
+    public Product updateProduct(Long id, UpdateProductDto updateProductDto)
+    {
+//        FakeStoreProductDto response = restTemplate.postForObject(
+//                "https://fakestoreapi.com/products/" + id,
+//                updateProductDto,
+//                FakeStoreProductDto.class
+//        );
+//
+//        return response.toProduct();
+
+        HttpEntity<UpdateProductDto> requestEntity = new HttpEntity<>(updateProductDto);
+        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.exchange(
+                "https://fakestoreapi.com/products/" + id,
+                HttpMethod.PUT,
+                requestEntity,
+                FakeStoreProductDto.class
+        );
+        return responseEntity.getBody().toProduct();
     }
 
 }
