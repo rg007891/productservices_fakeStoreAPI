@@ -53,11 +53,11 @@ public class ProductController {
         return productService.deleteProduct(id);
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<ErrorDto> errorHandler(){
-        ErrorDto errorDto = new ErrorDto();
-        errorDto.setMessage("Something went wrong. Please try later.");
-
-        return new ResponseEntity<>(errorDto, HttpStatusCode.valueOf(404));
-    }
+//    @ExceptionHandler(NullPointerException.class)
+//    public ResponseEntity<ErrorDto> errorHandler(){
+//        ErrorDto errorDto = new ErrorDto();
+//        errorDto.setMessage("Something went wrong. Please try later.");
+//
+//        return new ResponseEntity<>(errorDto, HttpStatusCode.valueOf(404));
+//    }
 }
