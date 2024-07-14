@@ -20,7 +20,7 @@ public class ProductController {
     public void createProduct(){
 
     }
-
+Hello
     @GetMapping("/products")
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
