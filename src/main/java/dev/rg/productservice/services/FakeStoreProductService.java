@@ -4,6 +4,7 @@ import dev.rg.productservice.dtos.FakeStoreProductDto;
 import dev.rg.productservice.dtos.UpdateProductDto;
 import dev.rg.productservice.models.Product;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Service
 public class FakeStoreProductService implements ProductService{
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public FakeStoreProductService(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
@@ -61,6 +62,19 @@ public class FakeStoreProductService implements ProductService{
                 requestEntity,
                 FakeStoreProductDto.class
         );
+        return responseEntity.getBody().toProduct();
+    }
+
+    public Product deleteProduct(Long id)
+    {
+        HttpEntity<String> requestEntity = new HttpEntity<>(new HttpHeaders());
+        ResponseEntity<FakeStoreProductDto> responseEntity = restTemplate.exchange(
+                "https://fakestoreapi.com/products/" + id,
+                HttpMethod.DELETE,
+                requestEntity,
+                FakeStoreProductDto.class
+        );
+
         return responseEntity.getBody().toProduct();
     }
 
