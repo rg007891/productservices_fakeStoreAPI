@@ -2,7 +2,10 @@ package dev.rg.productservice.services;
 
 import dev.rg.productservice.models.Product;
 
-public interface ProductService {
+import java.util.List;
 
+public interface ProductService {
     public Product getSingleProduct(Long id);
+
+    public List<Product> getAllProducts();
 }
