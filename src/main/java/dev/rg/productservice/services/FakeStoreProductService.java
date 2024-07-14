@@ -31,6 +31,24 @@ public class FakeStoreProductService implements ProductService{
         return responseEntity.getBody().toProduct();
     }
 
+    public List<Product> getProductByCategory(String category)
+    {
+        ResponseEntity<FakeStoreProductDto[]> responseEntity = restTemplate.getForEntity(
+                "https://fakestoreapi.com/products/category/" + category,
+                FakeStoreProductDto[].class
+        );
+
+        FakeStoreProductDto[] fakeStoreProductDtos = responseEntity.getBody();
+
+        List<Product> products = new ArrayList<>();
+        for(FakeStoreProductDto fakeStoreProductDto: fakeStoreProductDtos)
+        {
+            products.add(fakeStoreProductDto.toProduct());
+        }
+
+        return products;
+    }
+
     public List<Product> getAllProducts(){
         String url = "https://fakestoreapi.com/products";
         FakeStoreProductDto[] response = restTemplate.getForObject(
