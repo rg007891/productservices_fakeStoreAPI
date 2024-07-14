@@ -78,4 +78,7 @@ public class FakeStoreProductService implements ProductService{
         return responseEntity.getBody().toProduct();
     }
 
+    public void test(){
+        // test method
+
 }
