@@ -20,8 +20,9 @@ public class ProductController {
         this.productService = productService;
     }
 
-    public void createProduct(){
-
+    @PostMapping()
+    public Product createProduct(@RequestBody UpdateProductDto newProduct){
+        return productService.createProduct(newProduct);
     }
 
     @GetMapping()

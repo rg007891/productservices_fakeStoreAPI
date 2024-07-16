@@ -17,6 +17,24 @@ import java.util.List;
 public class FakeStoreProductService implements ProductService{
     private final RestTemplate restTemplate;
 
+    @Override
+    public Product createProduct(UpdateProductDto newProduct) {
+        FakeStoreProductDto fakeStoreProductDto = new FakeStoreProductDto();
+        fakeStoreProductDto.setTitle(newProduct.getTitle());
+        fakeStoreProductDto.setPrice(newProduct.getPrice());
+        fakeStoreProductDto.setDescription(newProduct.getDescription());
+        fakeStoreProductDto.setImage(newProduct.getImage());
+        fakeStoreProductDto.setCategory(newProduct.getCategory());
+
+        ResponseEntity<FakeStoreProductDto> response = restTemplate.postForEntity(
+                "https://fakestoreapi.com/products",
+                fakeStoreProductDto,
+                FakeStoreProductDto.class
+        );
+
+        return response.getBody().toProduct();
+    }
+
     public FakeStoreProductService(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }

@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 public interface ProductService {
+
+    public Product createProduct(UpdateProductDto newProduct);
+
     public Product getSingleProduct(Long id);
 
     public List<Product> getProductByCategory(String category);
